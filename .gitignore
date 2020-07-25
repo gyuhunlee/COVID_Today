@@ -3,3 +3,6 @@ node_modules
 
 # Bundle
 bundle.js
+
+# MySQL Configs
+dbConfig.json
