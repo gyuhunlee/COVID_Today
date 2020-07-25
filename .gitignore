@@ -6,3 +6,6 @@ bundle.js
 
 # MySQL Configs
 dbConfig.json
+
+# Schema
+theschema.sql
