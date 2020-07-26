@@ -4,8 +4,10 @@ const info = require('../server/api/covidAPI.js');
 // info.covidData
 const seedDB = () => {
   info.covidData()
-    .then((result) => {
-      console.log(result);
+    .then((res) => {
+      console.log(res.data)
+      // db.query() insert into
+
       db.end();
     })
     .catch((err) => {
