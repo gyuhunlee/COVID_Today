@@ -5,7 +5,18 @@ const info = require('../server/api/covidAPI.js');
 const seedDB = () => {
   info.covidData()
     .then((res) => {
-      console.log(res.data)
+      res.data.forEach(result => {
+        // console.log(state);
+        var todayData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
+
+        var queryCommand = "INSERT INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";
+        db.query(queryCommand, todayData, (err, response) => {
+          if (err) {
+            console.log(err);
+          }
+        });
+      })
+      // console.log(res.data)
       // db.query() insert into
 
       db.end();
@@ -17,3 +28,10 @@ const seedDB = () => {
 
 seedDB();
 
+
+
+// Data Website
+// https://covidtracking.com/data/api
+
+// Schema
+// sudo mysql -u root < theschema.sql
