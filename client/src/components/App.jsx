@@ -12,12 +12,13 @@ class App extends React.Component {
     this.state = {
       yesterdayData: [],
       covidData: [],
-
+      theDate: this.getTodayDate(),
+      sorting: ""
     }
   }
 
   componentDidMount() {
-    this.getRequest(this.getTodayDate());
+    this.getRequest(this.state.theDate);
   }
 
   getRequest(date, sort) {
@@ -62,7 +63,17 @@ class App extends React.Component {
   }
 
   sortByDropDown(value) {
-    this.getRequest(this.getTodayDate(), value);
+    this.getRequest(this.state.theDate, value);
+    this.setState({
+      sorting: value
+    })
+  }
+
+  dateDropDown(date) {
+    this.getRequest(date, this.state.sorting);
+    this.setState({
+      theDate: date
+    })
   }
 
   render() {
@@ -71,7 +82,8 @@ class App extends React.Component {
     return (
       <div>
         <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
-        <SortBy sortByDropDown={this.sortByDropDown.bind(this)} />
+        <SortBy dateDropDown={this.dateDropDown.bind(this)}
+                sortByDropDown={this.sortByDropDown.bind(this)} />
         <TableDataList covidData={covidData} />
       </div>
     )
