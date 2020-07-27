@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 
-app.get('/covid/domestic', controller.getData);
+app.get('/covid/domestic', controller.prevData);
 
 
 const port = process.env.PORT || 3456;
