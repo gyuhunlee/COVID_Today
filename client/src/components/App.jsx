@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import axios from 'axios';
+
+import TableDataList from './TableDataList.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      yesterdayData: [],
       covidData: []
     }
   }
@@ -21,6 +23,7 @@ class App extends React.Component {
     axios.get(url)
     .then(covid => {
       this.setState({
+        yesterdayData: this.state.covidData,
         covidData: covid.data
       })
     })
@@ -28,7 +31,6 @@ class App extends React.Component {
 
   getTodayDate(selectedDate) {
     var timeNow = selectedDate || new Date();
-
     var year = String(timeNow.getFullYear());
     var mm = String(timeNow.getMonth() + 1).padStart(2, '0');
     var dd = String(timeNow.getDate()).padStart(2, '0');
@@ -40,6 +42,7 @@ class App extends React.Component {
     return (
       <div>
         <div>Hey there</div>
+        <TableDataList covidData={this.state.covidData} />
       </div>
     )
   }
