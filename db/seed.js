@@ -7,10 +7,10 @@ const seedDB = () => {
     .then((res) => {
       res.data.forEach(result => {
         // console.log(state);
-        var todayData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
+        var prevData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
 
         var queryCommand = "INSERT INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";
-        db.query(queryCommand, todayData, (err, response) => {
+        db.query(queryCommand, prevData, (err, response) => {
           if (err) {
             console.log(err);
           }

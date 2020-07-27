@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      todayData: []
+      covidData: []
     }
   }
 
@@ -16,28 +16,27 @@ class App extends React.Component {
     this.getRequest(this.getTodayDate());
   }
 
-  getRequest(today) {
-    var url = '/covid/domestic/' + today;
+  getRequest(date) {
+    var url = '/covid/domestic/' + date;
     axios.get(url)
-    .then(prevCovidData => {
+    .then(covid => {
       this.setState({
-        todayData: prevCovidData
+        covidData: covid.data
       })
     })
   }
 
-  getTodayDate() {
-    var timeNow = new Date();
+  getTodayDate(selectedDate) {
+    var timeNow = selectedDate || new Date();
 
     var year = String(timeNow.getFullYear());
     var mm = String(timeNow.getMonth() + 1).padStart(2, '0');
-    var dd = String(timeNow.getDate() - 1).padStart(2, '0');
+    var dd = String(timeNow.getDate()).padStart(2, '0');
 
     return Number(year + mm + dd);
   }
 
   render() {
-    console.log(this.state.todayData);
     return (
       <div>
         <div>Hey there</div>
