@@ -11,7 +11,8 @@ class App extends React.Component {
 
     this.state = {
       yesterdayData: [],
-      covidData: []
+      covidData: [],
+
     }
   }
 
@@ -19,8 +20,12 @@ class App extends React.Component {
     this.getRequest(this.getTodayDate());
   }
 
-  getRequest(date) {
+  getRequest(date, sort) {
     var url = '/covid/domestic/' + date;
+    if (sort) {
+      url += '/' + sort;
+    }
+    console.log(url);
     axios.get(url)
     .then(covid => {
       this.setState({
@@ -51,13 +56,17 @@ class App extends React.Component {
     }, '');
   }
 
+  sortByDropDown(value) {
+    this.getRequest(this.getTodayDate(), value);
+  }
+
   render() {
     var { covidData } = this.state;
     var time = this.tableTitle(this.getTodayDate());
     return (
       <div>
         <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
-        <SortBy />
+        <SortBy sortByDropDown={this.sortByDropDown.bind(this)} />
         <TableDataList covidData={covidData} />
       </div>
     )
