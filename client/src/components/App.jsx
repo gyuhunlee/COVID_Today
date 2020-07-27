@@ -13,12 +13,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    getRequest(getTodayDate());
+    this.getRequest(this.getTodayDate());
   }
 
   getRequest(today) {
-    const data = { today };
-    axios.get('/covid/domestic', data)
+    var url = '/covid/domestic/' + today;
+    axios.get(url)
     .then(prevCovidData => {
       this.setState({
         todayData: prevCovidData
@@ -31,12 +31,13 @@ class App extends React.Component {
 
     var year = String(timeNow.getFullYear());
     var mm = String(timeNow.getMonth() + 1).padStart(2, '0');
-    var dd = String(timeNow.getDate()).padStart(2, '0');
+    var dd = String(timeNow.getDate() - 1).padStart(2, '0');
 
     return Number(year + mm + dd);
   }
 
   render() {
+    console.log(this.state.todayData);
     return (
       <div>
         <div>Hey there</div>
