@@ -39,9 +39,11 @@ class App extends React.Component {
   }
 
   render() {
+    var { covidData } = this.state;
+    var time = this.getTodayDate();
     return (
       <div>
-        <div>Hey there</div>
+        <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
         <TableDataList covidData={this.state.covidData} />
       </div>
     )

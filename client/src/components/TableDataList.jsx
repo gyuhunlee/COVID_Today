@@ -4,14 +4,36 @@ import TableData from './TableData.jsx';
 
 const TableDataList = (props) => {
   const { covidData } = props;
-  console.log('tabledatalist:', covidData);
+
+  function tableHeader() {
+    const headers = <tr>
+      <th>State</th>
+      <th>Positive</th>
+      <th>Positive Increase</th>
+      <th>Death Increase</th>
+      <th>Total</th>
+    </tr>
+    return headers;
+  };
+
   return (
     <div>
-      {
-        covidData.map(eachData => (
-          <TableData eachData={eachData} key={eachData.id}/>
-        ))
-      }
+      <table id='table'>
+        <tbody>
+          <tr>
+            <th>State</th>
+            <th>Positive</th>
+            <th>Positive Increase</th>
+            <th>Death Increase</th>
+            <th>Total</th>
+          </tr>
+          {
+            covidData.map(eachData => (
+              <TableData eachData={eachData} key={eachData.id}/>
+            ))
+          }
+        </tbody>
+      </table>
     </div>
   )
 };
