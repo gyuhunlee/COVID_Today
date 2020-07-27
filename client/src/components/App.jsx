@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import TableDataList from './TableDataList.jsx';
 import SortBy from './SortBy.jsx';
+import StateMap from './StateMap.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -82,6 +83,7 @@ class App extends React.Component {
     return (
       <div>
         <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
+        <StateMap />
         <SortBy dateDropDown={this.dateDropDown.bind(this)}
                 sortByDropDown={this.sortByDropDown.bind(this)} />
         <TableDataList covidData={covidData} />
