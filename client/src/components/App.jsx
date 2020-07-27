@@ -40,7 +40,12 @@ class App extends React.Component {
     var year = String(timeNow.getFullYear());
     var mm = String(timeNow.getMonth() + 1).padStart(2, '0');
     var dd = String(timeNow.getDate() - 1).padStart(2, '0');
+    var hh = timeNow.getHours();
 
+    if (hh > 14) {
+      dd = Number(dd) + 1
+      dd = String(dd).padStart(2, '0');
+    }
     return Number(year + mm + dd);
   }
 

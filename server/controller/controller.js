@@ -4,42 +4,42 @@ const info = require('..//api/covidAPI.js');
 
 module.exports = {
   covidData: (req, res) => {
-    const today = req.params.today;
-    db.query(`SELECT * FROM States where today=${today}`, (err, result) => {
+    var today = req.params.today;
+    var queryCommand = `SELECT * FROM States where today=${today}`
+    db.query(queryCommand, (err, result) => {
       if (!result.length) {
         info.currentCovidData()
           .then(response => {
-            if (today === response.data.date) {
-              // console.log('hi')
-              response.data.forEach(result => {
-                var todayData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
+            response.data.forEach(result => {
+              var todayData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
 
-                var queryCommand = "INSERT INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";
-                db.query(queryCommand, todayData, (err, response) => {
-                  if (err) {
-                    console.log(err);
-                  }
-                });
-
+              var insertCommand = "INSERT INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";
+              db.query(insertCommand, todayData, (err, response) => {
+                if (err) {
+                  console.log(err);
+                }
               });
-            }
-        })
-      }
-      db.query(`SELECT * FROM States where today=${today}`, (err, todayResult) => {
-        const yesterday = (Number(today) - 1).toString();
-        if (!todayResult.length) {
-          db.query(`SELECT * FROM States where today=${yesterday}`, (err, yesResult) => {
-            if (err) {
-              res.status(500).send('Uh oh, something went wrong');
-            } else {
-              res.status(200).send(yesResult);
-            }
+            });
           });
-        } else {
-          res.status(200).send(todayResult);
+      }
+      db.query(queryCommand, (err, finalResult) => {
+        if (err) {
+          res.status(500).send(err);
         }
-      })
-
+        res.status(200).send(finalResult);
+      });
     });
+  },
+
+  sortBy: (req, res) => {
+    var sorting = req.params.sortby.split('-');
+    var today = req.params.today;
+    var queryCommand = `SELECT * FROM States where today=${today} ORDER BY ${sorting[0]} ${sorting[1]}`;
+    db.query(queryCommand, (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+      res.status(200).send(result);
+    })
   }
 }
