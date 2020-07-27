@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, '../client/public')));
 
 
 app.get('/covid/domestic/:today', controller.covidData);
-
+app.get('/covid/domestic/:today/:sortby', controller.sortBy);
 
 const port = process.env.PORT || 3456;
 
