@@ -3,7 +3,7 @@ const info = require('../server/api/covidAPI.js');
 
 // info.covidData
 const seedDB = () => {
-  info.covidData()
+  info.prevCovidData()
     .then((res) => {
       res.data.forEach(result => {
         // console.log(state);
@@ -16,8 +16,6 @@ const seedDB = () => {
           }
         });
       })
-      // console.log(res.data)
-      // db.query() insert into
 
       db.end();
     })

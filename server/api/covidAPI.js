@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = {
-  covidData: () => {
+  prevCovidData: () => {
     return axios.get('https://covidtracking.com/api/v1/states/daily.json')
       .then(result => result)
       .catch(err => {
