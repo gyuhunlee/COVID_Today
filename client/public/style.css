@@ -37,3 +37,11 @@
 #dateSelect {
   margin-right: 35px;
 }
+
+.map {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  position: relative;
+  right: 10%;
+}

@@ -6,6 +6,9 @@ import TableDataList from './TableDataList.jsx';
 import SortBy from './SortBy.jsx';
 import StateMap from './StateMap.jsx';
 
+import mapSampleData from '../helper/mapData.js';
+import colorScale from '../helper/colorScale.js';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +17,8 @@ class App extends React.Component {
       yesterdayData: [],
       covidData: [],
       theDate: this.getTodayDate(),
-      sorting: ""
+      sorting: "",
+      mapData: mapSampleData
     }
   }
 
@@ -27,14 +31,26 @@ class App extends React.Component {
     if (sort) {
       url += '/' + sort;
     }
-    console.log(url);
     axios.get(url)
     .then(covid => {
+      this.populateMapData(covid.data);
       this.setState({
         yesterdayData: this.state.covidData,
         covidData: covid.data
       })
     })
+  }
+
+  populateMapData(array) {
+    for (let i = 0; i < array.length; i++) {
+      var state = array[i].statename
+      if (mapSampleData[state]) {
+        mapSampleData[state].total = array[i].total;
+      }
+    }
+    this.setState({
+      mapData: colorScale(mapSampleData)
+    });
   }
 
   getTodayDate(selectedDate) {
@@ -83,7 +99,7 @@ class App extends React.Component {
     return (
       <div>
         <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
-        <StateMap />
+        <StateMap mapData={this.state.mapData} />
         <SortBy dateDropDown={this.dateDropDown.bind(this)}
                 sortByDropDown={this.sortByDropDown.bind(this)} />
         <TableDataList covidData={covidData} />
