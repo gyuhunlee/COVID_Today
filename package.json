@@ -9,6 +9,9 @@
     "react-dev": "webpack -d --watch",
     "db-dev": "node db/seed.js"
   },
+  "engines": {
+    "node": "10.20.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tokki0401/MVP-Project.git"
