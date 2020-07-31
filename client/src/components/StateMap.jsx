@@ -4,12 +4,13 @@ import ReactDOM from 'react-dom';
 import Datamap from 'datamaps';
 import mapConfig from '../helper/map.config.js';
 
+
 class StateMap extends React.Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
     this.state = {
-      data: null,
+      data: null
     };
     this.mapConfig = mapConfig;
     this.mapConfig.data = this.props.mapData;

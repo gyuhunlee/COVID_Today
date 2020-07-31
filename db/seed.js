@@ -15,6 +15,13 @@ const seedDB = () => {
             console.log(err);
           }
         });
+
+        var queryCommandTwo = "INSERT IGNORE INTO Dates (today) VALUES (?)";
+        db.query(queryCommandTwo, [ result.date ], (err, res) => {
+          if (err) {
+            console.log(err);
+          }
+        })
       })
 
       db.end();

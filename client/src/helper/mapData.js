@@ -1,150 +1,150 @@
 module.exports = {
   'AZ': {
-    'total': 1
+    'total': 11
   },
   'CO': {
-    'total': 1
+    'total': 22
   },
   'DE': {
-    'total': 1
+    'total': 12
   },
   'FL': {
-    'total': 1
+    'total': 37
   },
   'GA': {
-    'total': 1
+    'total': 4
   },
   'HI': {
-    'total': 1
+    'total': 20
   },
   'ID': {
-    'total': 1
+    'total': 5
   },
   'IL': {
-    'total': 1
+    'total': 11
   },
   'IN': {
-    'total': 1
+    'total': 17
   },
   'IA': {
-    'total': 1
+    'total': 5
   },
   'KS': {
-    'total': 1
+    'total': 15
   },
   'KY': {
-    'total': 1
+    'total': 8
   },
   'LA': {
-    'total': 1
+    'total': 12
   },
   'MD': {
-    'total': 1
+    'total': 3
   },
   'ME': {
-    'total': 1
+    'total': 22
   },
   'MA': {
-    'total': 1
+    'total': 3
   },
   'MN': {
-    'total': 1
+    'total': 20
   },
   'MI': {
-    'total': 1
+    'total': 25
   },
   'MS': {
-    'total': 1
+    'total': 11
   },
   'MO': {
-    'total': 1
+    'total': 4
   },
   'MT': {
-    'total': 1
+    'total': 2
   },
   'NC': {
-    'total': 1
+    'total': 18
   },
   'NE': {
-    'total': 1
+    'total': 5
   },
   'NV': {
-    'total': 1
+    'total': 8
   },
   'NH': {
-    'total': 1
+    'total': 15
   },
   'NJ': {
-    'total': 1
+    'total': 11
   },
   'NY': {
-    'total': 1
+    'total': 31
   },
   'ND': {
-    'total': 1
+    'total': 27
   },
   'NM': {
-    'total': 1
+    'total': 5
   },
   'OH': {
-    'total': 1
+    'total': 7
   },
   'OK': {
-    'total': 1
+    'total': 11
   },
   'OR': {
-    'total': 1
+    'total': 15
   },
   'PA': {
-    'total': 1
+    'total': 9
   },
   'RI': {
-    'total': 1
+    'total': 12
   },
   'SC': {
-    'total': 1
+    'total': 14
   },
   'SD': {
-    'total': 1
+    'total': 22
   },
   'TN': {
-    'total': 1
+    'total': 3
   },
   'TX': {
-    'total': 1
+    'total': 17
   },
   'UT': {
-    'total': 1
+    'total': 10
   },
   'WI': {
-    'total': 1
+    'total': 22
   },
   'VA': {
-    'total': 1
+    'total': 11
   },
   'VT': {
-    'total': 1
+    'total': 14
   },
   'WA': {
-    'total': 1
+    'total': 32
   },
   'WV': {
-    'total': 1
+    'total': 3
   },
   'WY': {
-    'total': 1
+    'total': 2
   },
   'CA': {
-    'total': 1
+    'total': 40
   },
   'CT': {
-    'total': 1
+    'total': 5
   },
   'AK': {
-    'total': 1
+    'total': 5
   },
   'AR': {
-    'total': 1
+    'total': 3
   },
   'AL': {
     'total': 1
