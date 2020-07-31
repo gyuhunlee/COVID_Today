@@ -7,18 +7,19 @@ module.exports = {
     var today = req.params.today;
     var queryCommand = `SELECT * FROM States where today=${today}`
     db.query(queryCommand, (err, result) => {
-      if (!result.length) {
+      if (result === undefined) {
         info.currentCovidData()
           .then(response => {
             response.data.forEach(result => {
               var todayData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
 
-              var insertCommand = "INSERT INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";
+              var insertCommand = "INSERT IGNORE INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";
               db.query(insertCommand, todayData, (err, response) => {
                 if (err) {
                   console.log(err);
                 }
               });
+
             });
           });
       }
@@ -39,6 +40,13 @@ module.exports = {
       if (err) {
         res.status(500).send(err);
       }
+      res.status(200).send(result);
+    })
+  },
+
+  getAllDates: (req, res) => {
+    var queryCommand = 'SELECT * FROM Dates ORDER BY today DESC';
+    db.query(queryCommand, (err, result) => {
       res.status(200).send(result);
     })
   }

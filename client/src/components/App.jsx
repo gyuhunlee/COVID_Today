@@ -4,21 +4,27 @@ import axios from 'axios';
 
 import TableDataList from './TableDataList.jsx';
 import SortBy from './SortBy.jsx';
+import StateMap from './StateMap.jsx';
+
+import mapSampleData from '../helper/mapData.js';
+import colorScale from '../helper/colorScale.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      yesterdayData: [],
       covidData: [],
       theDate: this.getTodayDate(),
-      sorting: ""
+      sorting: "",
+      mapData: mapSampleData,
+      dates: []
     }
   }
 
   componentDidMount() {
     this.getRequest(this.state.theDate);
+    this.getRequestForDates();
   }
 
   getRequest(date, sort) {
@@ -26,21 +32,41 @@ class App extends React.Component {
     if (sort) {
       url += '/' + sort;
     }
-    console.log(url);
     axios.get(url)
     .then(covid => {
+      this.populateMapData(covid.data);
       this.setState({
-        yesterdayData: this.state.covidData,
         covidData: covid.data
       })
     })
+  }
+
+  getRequestForDates() {
+    axios.get('/getdata')
+    .then(dateGiven => {
+      this.setState({
+        dates: dateGiven.data
+      })
+    })
+  }
+
+  populateMapData(array) {
+    for (let i = 0; i < array.length; i++) {
+      var state = array[i].statename
+      if (mapSampleData[state]) {
+        mapSampleData[state].total = array[i].total;
+      }
+    }
+    this.setState({
+      mapData: colorScale(mapSampleData)
+    });
   }
 
   getTodayDate(selectedDate) {
     var timeNow = selectedDate || new Date();
     var year = String(timeNow.getFullYear());
     var mm = String(timeNow.getMonth() + 1).padStart(2, '0');
-    var dd = String(timeNow.getDate() - 1).padStart(2, '0');
+    var dd = String(timeNow.getDate()).padStart(2, '0');
     var hh = timeNow.getHours();
 
     if (hh > 14) {
@@ -82,8 +108,10 @@ class App extends React.Component {
     return (
       <div>
         <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
+        <StateMap mapData={colorScale(this.state.mapData)} />
         <SortBy dateDropDown={this.dateDropDown.bind(this)}
-                sortByDropDown={this.sortByDropDown.bind(this)} />
+                sortByDropDown={this.sortByDropDown.bind(this)}
+                dates={this.state.dates} />
         <TableDataList covidData={covidData} />
       </div>
     )

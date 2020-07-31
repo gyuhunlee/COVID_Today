@@ -30,10 +30,18 @@
   align-items: center;
 }
 
-#sortby {
+#sortby, #dateSelect {
   margin-left: 15px;
 }
 
 #dateSelect {
-  margin-right: 30px;
+  margin-right: 35px;
+}
+
+.map {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  position: relative;
+  right: 10%;
 }
