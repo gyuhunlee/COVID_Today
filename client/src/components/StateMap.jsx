@@ -28,7 +28,9 @@ class StateMap extends React.Component {
 
   render() {
     return (
-      <div className="map" ref={this.myRef}></div>
+      <div>
+        <article className="map" ref={this.myRef}></article>
+      </div>
     );
   }
 }

@@ -66,7 +66,7 @@ class App extends React.Component {
     var timeNow = selectedDate || new Date();
     var year = String(timeNow.getFullYear());
     var mm = String(timeNow.getMonth() + 1).padStart(2, '0');
-    var dd = String(timeNow.getDate()).padStart(2, '0');
+    var dd = String(timeNow.getDate() - 1).padStart(2, '0');
     var hh = timeNow.getHours();
 
     if (hh > 14) {
@@ -107,7 +107,11 @@ class App extends React.Component {
     var time = this.tableTitle(this.getTodayDate());
     return (
       <div>
-        <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
+        <div id="navbar">
+          <h1 id='title'>COVID-19 Cases and Deaths As Of {time}</h1>
+          <h3>Don't forget to wear your mask to protect yourself!</h3>
+          <h4>Data Provided by covidtracking.com</h4>
+        </div>
         <StateMap mapData={colorScale(this.state.mapData)} />
         <SortBy dateDropDown={this.dateDropDown.bind(this)}
                 sortByDropDown={this.sortByDropDown.bind(this)}
