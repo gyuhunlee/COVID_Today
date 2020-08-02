@@ -6,7 +6,6 @@ const seedDB = () => {
   info.prevCovidData()
     .then((res) => {
       res.data.forEach(result => {
-        // console.log(state);
         var prevData = [ result.date, result.state, result.positive, result.positiveIncrease, result.deathIncrease, result.total ];
 
         var queryCommand = "INSERT INTO States ( today, statename, positive, positiveIncrease, deathIncrease, total ) VALUES ( ?, ?, ?, ?, ?, ? )";

@@ -38,8 +38,3 @@ class StateMap extends React.Component {
 
 export default StateMap;
 
-
-
-// https://github.com/markmarkoh/datamaps/blob/master/README.md#getting-started
-
-// https://datamaps.github.io/
